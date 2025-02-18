@@ -4,10 +4,18 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.myordermanager.ui.LoginWork
+import com.example.myordermanager.ui.LoginWork.Companion.LoginScreen
 import kotlinx.serialization.Serializable
 
-@kotlinx.serialization.Serializable
-object Profile
+
+
+
+
+@Serializable
+object Login
+
+
 @Serializable
 object Splash
 
@@ -17,18 +25,12 @@ fun Route() {
 
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Profile) {
-        composable<Profile> { ProfileScreen( /* ... */) }
+    NavHost(navController = navController, startDestination = Login) {
+        composable<Login> { LoginScreen("") }
         composable<Splash> { SplashScreen( /* ... */) }
-        // Add more destinations similarly.
-    }
+       }
 }
 
-
-@Composable
-fun ProfileScreen(){
-
-}
 @Composable
 fun SplashScreen(){
 

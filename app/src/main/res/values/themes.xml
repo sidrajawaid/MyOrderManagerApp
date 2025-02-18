@@ -23,7 +23,7 @@
 
     <style name="Theme.MyOrderManager.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <!-- Base application theme. -->
-    <style name="Base.Theme.MyOrderManager" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.MyOrderManager" parent="Theme.MaterialComponents.DayNight">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>

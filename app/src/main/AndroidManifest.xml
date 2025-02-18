@@ -13,7 +13,7 @@
         android:theme="@style/Theme.MyOrderManager"
         tools:targetApi="31" >
         <activity
-            android:name=".activities.AuthenticationProcessActivity"
+            android:name=".MainActivity"
             android:exported="false"
             android:theme="@style/Theme.MyOrderManager" />
         <activity
