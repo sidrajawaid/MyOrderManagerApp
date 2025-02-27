@@ -27,7 +27,20 @@ import androidx.compose.ui.text.TextStyle
 import kotlinx.serialization.Serializable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.credentials.CredentialManager
 import com.example.myordermanager.ui.theme.AppTheme
+import android.content.Context
+import android.credentials.GetCredentialException
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
+import androidx.compose.ui.platform.LocalContext
+import androidx.credentials.GetCredentialRequest
+import androidx.credentials.GetPasswordOption
+import androidx.credentials.GetPublicKeyCredentialOption
+import com.example.myordermanager.application.Myapplication
+import kotlinx.coroutines.coroutineScope
+import java.util.UUID
 
 @Suppress("NAME_SHADOWING")
 @Serializable
@@ -70,7 +83,7 @@ class LoginWork {
                                 )
 
                                 ElevatedButton(
-                                    onClick = { onClick() }
+                                    onClick = { onButtonPress() }
                                 ) {
                                     Text("Login")
 
@@ -100,7 +113,9 @@ class LoginWork {
             }
         }
 
-       private fun  onClick(){}
+        private fun onButtonPress() {
+
+        }
 
 
         @Preview
@@ -108,6 +123,16 @@ class LoginWork {
         internal fun PreviewLoginScreen() {
             LoginScreen("hello")
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    private fun  onClick(){
+
+
+    }
+
+
+    fun credentialManager() {
     }
 }
 
