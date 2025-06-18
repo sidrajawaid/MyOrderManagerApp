@@ -10,6 +10,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
+import androidx.activity.viewModels
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -34,105 +35,81 @@ import android.credentials.GetCredentialException
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetPasswordOption
 import androidx.credentials.GetPublicKeyCredentialOption
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myordermanager.ViewModel.AuthenticationViewmodel
 import com.example.myordermanager.application.Myapplication
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.coroutineScope
 import java.util.UUID
 
-@Suppress("NAME_SHADOWING")
-@Serializable
-class LoginWork {
 
-    companion object {
-
-        @Composable
-        fun LoginScreen(param: String) {
-
-            var text by remember { mutableStateOf(param) }
-            var text1 by remember { mutableStateOf(param) }
-
-            AppTheme {
-              //  Surface {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillMaxWidth()
-                            .wrapContentHeight(Alignment.CenterVertically)
-                            .padding(24.dp)
-                            .background(Color.White)
-                            .padding(16.dp),
-                    ) {
-                        ElevatedCard(
-                            elevation = CardDefaults.cardElevation(
-                                defaultElevation = 6.dp,
-                                ),
-                        ) {
-                            Column(modifier = Modifier.padding(16.dp)) {
-                                OutlinedTextField(
-                                    value = text,
-                                    onValueChange = { text = it },
-                                    label = { Text("username") })
-
-                                OutlinedTextField(
-                                    value = text1,
-                                    onValueChange = { text1 = it },
-                                    label = { Text("password") },
-                                    textStyle = MaterialTheme.typography.headlineMedium
-                                )
-
-                                ElevatedButton(
-                                    onClick = { onButtonPress() }
-                                ) {
-                                    Text("Login")
-
-                                }
+@Composable
+fun LoginScreen(param: String, viewM: AuthenticationViewmodel = viewModel()) {
 
 
-                                var text by remember { mutableStateOf("") }
-                                val brush = remember {
-                                    Brush.sweepGradient(
-                                        colors = listOf(Color.Red, Color.Cyan, Color.Blue)
-                                    )
-                                }
-                                TextField(
-                                    value = text,
-                                    onValueChange = { text = it },
-                                    textStyle = TextStyle(brush = brush)
-                                )
+    var text by remember { mutableStateOf(param) }
+    var text1 by remember { mutableStateOf(param) }
+    val contx = LocalContext.current
+    AppTheme {
+        //  Surface {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(Alignment.CenterVertically)
+                .padding(24.dp)
+                .background(Color.White)
+                .padding(16.dp),
+        ) {
+            ElevatedCard(
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 6.dp,
+                ),
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    OutlinedTextField(
+                        value = text,
+                        onValueChange = { text = it },
+                        label = { Text("username") })
 
-                                Text(
-                                    text = "Hello !",
-                                    style = MaterialTheme.typography.titleLarge
-                                )
-                            }
+                    OutlinedTextField(
+                        value = text1,
+                        onValueChange = { text1 = it },
+                        label = { Text("password") },
+                        textStyle = MaterialTheme.typography.headlineMedium
+                    )
+
+                    ElevatedButton(modifier = Modifier.fillMaxWidth(),
+                        border = BorderStroke(1.dp, color = Color.Cyan),
+                        shape = RoundedCornerShape(40.dp),
+                        onClick = {
+                              viewM.buttonClick(contx)
                         }
+                    ) {
+                        Text("Login")
+
                     }
-               // }
+
+
+                    var text by remember { mutableStateOf("") }
+                    val brush = remember {
+                        Brush.sweepGradient(
+                            colors = listOf(Color.Red, Color.Cyan, Color.Blue)
+                        )
+                    }
+
+                }
             }
         }
 
-        private fun onButtonPress() {
-
-        }
-
-
-        @Preview
-        @Composable
-        internal fun PreviewLoginScreen() {
-            LoginScreen("hello")
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
-    private fun  onClick(){
-
-
-    }
-
-
-    fun credentialManager() {
-    }
+}
 }
 

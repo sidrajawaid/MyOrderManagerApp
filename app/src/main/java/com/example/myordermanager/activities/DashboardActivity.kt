@@ -8,21 +8,20 @@ import android.view.animation.OvershootInterpolator
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.myordermanager.MainviewModel
 import com.example.myordermanager.NavigationRoute.Route
+import com.example.myordermanager.ViewModel.MainviewModel
 import com.example.myordermanager.ui.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class DashboardActivity : ComponentActivity() {
 
 
     private val mainVieModel by viewModels<MainviewModel>()
+  // private val viewModel = ViewModelProvider(this).get(SheduleViewModel::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +41,6 @@ class DashboardActivity : ComponentActivity() {
                 zoomx.duration = 800
                 zoomx.doOnEnd {
                     screen.remove()
-
                 }
 
                 val zoomy = ObjectAnimator.ofFloat(
@@ -63,7 +61,7 @@ class DashboardActivity : ComponentActivity() {
 
         setContent() {
             AppTheme {
-//              Route()
+             Route()
             }
 
         }

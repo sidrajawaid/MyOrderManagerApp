@@ -1,11 +1,18 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
-    alias (libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.google.gms.google.services)
+    //alias(libs.plugins.kotlin.kapt)
+   // alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.hilt)
+    id("kotlin-kapt")
 
 }
+
 
 android {
     namespace = "com.example.myordermanager"
@@ -19,6 +26,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    packaging {
+        resources.excludes.add("META-INF/gradle/incremental.annotation.processors")
+
+        jniLibs {
+            excludes += "META-INF/gradle/incremental.annotation.processors"
+        }
     }
 
     composeOptions {
@@ -91,23 +106,23 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.credentials)
-  //  implementation("org.jetbrains.kotlin.android:2.0.0")
+    //  implementation("org.jetbrains.kotlin.android:2.0.0")
 
     // optional - needed for credentials support from play services, for devices running
     // Android 13 and below.
- //   implementation(libs.androidx.credentials.play.services.auth)
+       implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.androidx.animation.android)
     implementation(libs.androidx.ui.android)
-    implementation (libs.androidx.foundation)
+    implementation(libs.androidx.foundation)
     implementation(libs.androidx.runtime)
-  //  implementation (libs.androidx.material3.adaptive.navigation.suite)
-    implementation( libs.navigation.compose)
+    //  implementation (libs.androidx.material3.adaptive.navigation.suite)
+    implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
-    implementation (libs.androidx.core.splashscreen)
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.activity.compose)
-    implementation (libs.androidx.credentials.v120)
-    implementation(libs.androidx.credentials.play.services.auth)
-   // implementation(platform(libs.androidx.compose.bom))
+   // implementation(libs.androidx.credentials.v120)
+   // implementation(libs.androidx.credentials.play.services.auth)
+    // implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling)
@@ -118,5 +133,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation (libs.androidx.core.splashscreen)
+    implementation(libs.androidx.core.splashscreen)
+    //hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
+    implementation(libs.play.services.auth)
+
 }

@@ -54,4 +54,8 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="web_client_id">959648160791-6bpa62hagnbtvv22u7usbv6j43c0o5ce.apps.googleusercontent.com</string>
+<string name="server_client_id">959648160791-hnd22dg4hrdsvte1s20j5d1aetv62td9.apps.googleusercontent.com</string>
+
 </resources>
